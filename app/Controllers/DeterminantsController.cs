@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using app.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,9 +12,9 @@ namespace app.Controllers
     public class DeterminantsController : Controller
     {
         private static ILogger _logger;
-        private static DeterminantsContext _context;
+        private static SqliteContext _context;
 
-        public DeterminantsController(DeterminantsContext context, ILogger<DeterminantsController> logger)
+        public DeterminantsController(SqliteContext context, ILogger<DeterminantsController> logger)
         {
             _logger = logger;
             _context = context;
@@ -24,7 +25,7 @@ namespace app.Controllers
         {
             using (_context)
             {
-                var determinants = _context.Determinants.ToList();
+                var determinants = _context.Determinants.Include(d => d.Country).ToList();
 
                 _logger.LogInformation(JsonConvert.SerializeObject(determinants));
 

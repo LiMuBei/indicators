@@ -17,7 +17,7 @@ namespace app
         {
             CreateWebHostBuilder(args).Build().Run();
 
-            using (var determinantsContext = new DeterminantsContext())
+            using (var determinantsContext = new SqliteContext())
             {
                 determinantsContext.Database.Migrate();
             }

@@ -24,7 +24,7 @@ namespace app
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var connection = "Data Source=indicators.db";
-            services.AddDbContext<DeterminantsContext>(options =>
+            services.AddDbContext<SqliteContext>(options =>
                 options.UseSqlite(connection));
 
             // In production, the React files will be served from this directory
